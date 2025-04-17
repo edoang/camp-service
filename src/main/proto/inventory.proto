@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "org.acme.camp.model";
+option java_outer_classname = "CampProtos";
+
+package camp;
+
+message InsertHeroRequest {
+  string name = 1;
+  string classe = 2;
+}
+
+message RemoveHeroRequest {
+  string name = 1;
+}
+
+message HeroResponse {
+  string name = 1;
+  string classe = 2;
+  int64 id = 3;
+}
+
+service CampService {
+  rpc add(stream InsertHeroRequest) returns (stream HeroResponse) {}
+  rpc remove(RemoveHeroRequest) returns (HeroResponse) {}
+}
